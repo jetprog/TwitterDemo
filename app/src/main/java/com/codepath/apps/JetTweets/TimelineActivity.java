@@ -2,6 +2,7 @@ package com.codepath.apps.JetTweets;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -22,6 +23,8 @@ import cz.msebera.android.httpclient.Header;
 
 public class TimelineActivity extends AppCompatActivity {
 
+    private SwipeRefreshLayout swipeContainer;
+
     private ArrayList<Tweet> tweets;
     private TweetsArrayAdapter aTweets;
     private ListView lvTweets;
@@ -37,6 +40,8 @@ public class TimelineActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
         //find the listview
         lvTweets = (ListView) findViewById(R.id.lvTweets);
         lvTweets.setOnScrollListener(new EndlessScrollListener() {
@@ -44,11 +49,32 @@ public class TimelineActivity extends AppCompatActivity {
             public boolean onLoadMore(int page, int totalItemsCount) {
                 // Triggered only when new data needs to be appended to the list
                 // Add whatever code is needed to append new items to your AdapterView
-                customLoadMoreDataFromApi(page);
+                fetchTimelineAsync(page);
                 // or customLoadMoreDataFromApi(totalItemsCount);
                 return true; // ONLY if more data is actually being loaded; false otherwise.
             }
         });
+
+
+        // Lookup the swipe container view
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+// Setup refresh listener which triggers new data loading
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                fetchTimelineAsync(0);
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_red_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_green_light);
+
         //create the arraylist
         tweets = new ArrayList<>();
         //create the adapter
@@ -63,11 +89,13 @@ public class TimelineActivity extends AppCompatActivity {
         fetchAuthUser();
     }
 
-    public void customLoadMoreDataFromApi(int offset) {
-        // Use the offset value and add it as a parameter to your API request to retrieve paginated data.
-        // Deserialize API response and then construct new objects to append to the adapter
+    public void fetchTimelineAsync(int page) {
+        // Send the network request to fetch the updated data
+        // `client` here is an instance of Android Async HTTP
+
         populateTimeline();
     }
+
 
     public void fetchAuthUser() {
         client.getAuthUser(new JsonHttpResponseHandler() {
@@ -94,6 +122,7 @@ public class TimelineActivity extends AppCompatActivity {
              //Success
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                aTweets.clear();
                 aTweets.addAll(Tweet.fromJSONArray(response));
                 aTweets.notifyDataSetChanged();
                 Log.d("DEBUG", response.toString());
