@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    tools:context="com.codepath.apps.JetTweets.ComposeTweetActivity">
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/ivProfileMakeTweet"
+        android:paddingLeft="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:text="Seth_Jet"
+        android:textStyle="bold"
+        android:id="@+id/tvUserName"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/ivProfileMakeTweet"
+        android:layout_toEndOf="@+id/ivProfileMakeTweet" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etBody"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/ivProfileMakeTweet"
+        android:layout_alignBottom="@+id/ivProfileMakeTweet"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:hint="write here" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="40dp"
+        android:text="Cancel"
+        android:textAlignment="center"
+        android:id="@+id/btCancel"
+        android:layout_marginTop="63dp"
+        android:layout_below="@+id/ivProfileMakeTweet"
+        android:layout_alignLeft="@+id/ivProfileMakeTweet"
+        android:layout_alignStart="@+id/ivProfileMakeTweet"
+        android:onClick="onCancel"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="40dp"
+        android:text="Tweet"
+        android:textAlignment="center"
+        android:id="@+id/btTweetl"
+        android:layout_alignTop="@+id/btCancel"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="onTweet"/>
+</RelativeLayout>
