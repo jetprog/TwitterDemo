@@ -9,4 +9,11 @@
         android:title="Make Tweet">
     </item>
 
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_profile"
+        app:showAsAction="ifRoom"
+        android:title="Profile">
+    </item>
+
 </menu>

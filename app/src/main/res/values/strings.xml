@@ -4,5 +4,6 @@
     <string name="app_name">JetTweets</string>
     <string name="login_label">Connect to Twitter</string>
     <string name="title_activity_timeline">Home Timeline</string>
+    <string name="title_activity_profile">Profil</string>
 
 </resources>
