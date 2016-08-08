@@ -15,9 +15,14 @@ The following **required** functionality is completed
       * [X]    User can click a “Compose” icon in the Action Bar on the top right
       * [X]    User can then enter a new tweet and post this to twitter
       * [X]    User is taken back to home timeline with new tweet visible in timeline
+      * 
+* [X] User can switch between Timeline and Mention views using tab 
+      * [X]      User can view their home timeline tweets.
+      * [X]      User can view the recent mentions of their username.
 
-* [X] The following advanced user stories are optional:
-      * [X]    User can refresh tweets timeline by pulling down to refresh (i.e pull-to-refresh)
+* [X] User can navigate to view their own profile
+      * [X]      User can see picture, tagline, # of followers, # of following, and tweets on their profile.
+
 
 ## Video preview of what it does
 Here's a video of what the app make
